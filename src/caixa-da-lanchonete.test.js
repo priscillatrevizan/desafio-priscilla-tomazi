@@ -48,4 +48,44 @@ describe('CaixaDaLanchonete', () => {
         ['queijo com outro item', 'debito', 'Item extra não pode ser pedido sem o principal', ['cafe,1', 'queijo,1']],
     ])('compra %p em %p deve resultar em %p', (_, formaDePagamento, resultadoEsperado, itens) =>
         validaTeste(formaDePagamento, resultadoEsperado, itens));
-});
+
+
+
+    //testes adicionais
+    test.each([
+        ['compra com forma de pagamento inválida', 'especie', 'Forma de pagamento inválida!', ['cafe,1']],      
+    ])(
+        '%s: compra em %p deve resultar em %p',
+
+        (_, formaDePagamento, resultadoEsperado, itens) => 
+            validaTeste(formaDePagamento, resultadoEsperado, itens));
+
+    test.each([
+        ['debito', 'R$ 4,50', ['cafe,1', 'chantily,1']], 
+        ['credito', 'R$ 8,76', ['sanduiche,1', 'queijo,1']],
+    ])('compra de 2 itens em %p deve resultar em %p', validaTeste);   
+
+    test.each([
+        ['debito', 'R$ 9,50', ['combo1,1']], 
+        ['credito', 'R$ 9,79', ['combo1,1']],
+    ])('compra de 1 combo1 em %p deve resultar em %p', validaTeste); 
+
+    test.each([
+        ['debito', 'R$ 7,50', ['combo2,1']], 
+        ['credito', 'R$ 7,73', ['combo2,1']],
+    ])('compra de 1 combo2 em %p deve resultar em %p', validaTeste); 
+
+    test.each([
+        ['dinheiro', 'Não há itens no carrinho de compra!', []],
+        ['dinheiro', 'Quantidade inválida!', ['cafe,0']],
+    ])('pagamento em dinheiro - forma: %p, resultado esperado: %p, itens: %p', (formaDePagamento, resultadoEsperado, itens) => {
+        const resultado = new CaixaDaLanchonete()
+            .calcularValorDaCompra(formaDePagamento, itens);
+    
+        expect(resultado).toEqual(resultadoEsperado);
+    });
+    
+}
+    );
+           
+
