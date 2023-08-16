@@ -83,8 +83,7 @@ describe('CaixaDaLanchonete', () => {
             .calcularValorDaCompra(formaDePagamento, itens);
     
         expect(resultado).toEqual(resultadoEsperado);
-    });
-    
+    }); 
 }
     );
            
