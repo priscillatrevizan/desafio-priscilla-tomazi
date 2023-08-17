@@ -1,6 +1,6 @@
 # DESAFIO CAIXA DA LANCHONETE
 
-## COMO BAIXAR O CÓDIGO E SUBMETER MINHA SOLUÇÃO?
+## COMO BAIXAR O CÓDIGO E REVISAR MINHA SOLUÇÃO?
 Este repositório contém minha solução para o desafio "Caixa da Lanchonete" proposto pela DB Server. O objetivo deste desafio era criar uma lógica para calcular o valor de uma compra de acordo com o cardápio, regras e descontos da Lanchonete.
 
 ### BAIXANDO A ESTRUTURA
