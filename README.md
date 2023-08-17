@@ -1,22 +1,34 @@
-<<<<<<< HEAD
-# CAIXA DA LANCHONETE
+# DESAFIO CAIXA DA LANCHONETE
 
 ## COMO BAIXAR O CÓDIGO E SUBMETER MINHA SOLUÇÃO?
-Para completar a etapa do desafio você terá que baixar a estrutura do código aqui na Azure, resolver o desafio e entregá-lo no repositório no seu github.
+Este repositório contém minha solução para o desafio "Caixa da Lanchonete" proposto pela DB Server. O objetivo deste desafio era criar uma lógica para calcular o valor de uma compra de acordo com o cardápio, regras e descontos da Lanchonete.
 
 ### BAIXANDO A ESTRUTURA
 Para baixar a estrutura no formato zip, basta clicar neste [link](https://dev.azure.com/db-tecnologia/371ab069-cd1e-4ede-8ae5-fa54dd981c56/_apis/git/repositories/a3a8fe92-b324-4d6b-abbd-1953e46fb075/items?path=/&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=main&resolveLfs=true&%24format=zip&api-version=5.0&download=true).
 
 
-### ENTREGANDO O DESAFIO
-Após resolver o desafio e validá-lo com os testes (mais detalhes nos tópicos abaixo), você terá que criar um repositório no [Github](https://github.com/) com o nome de `desafio-$seunome-$sobrenome` (substitua os nomes com $ pelo seu próprio nome e sobrenome). Deṕos disso, você pode enviar o link do seu repositório para que possamos validá-lo para o e-mail: `start@dbserver.com.br`
+### ESTRUTURA DO CÓDIGO
 
-Se você ainda não teve contato com essas ferramentas, não tem problema, separamos um material para lhe ajudar nessa etapa: [Como usar Git e Github na prática](https://www.youtube.com/watch?v=UBAX-13g8OM).
+src/: Esta pasta contém os arquivos relacionados à implementação da lógica do caixa da lanchonete.
+caixa-da-lanchonete.js: Arquivo principal que contém a implementação da lógica do caixa da lanchonete.
+caixa-da-lanchonete.test.js: Arquivo de testes com cenários para validar a solução.
 
 
-## O DESAFIO
-Olá! Você foi contratado para automatizar o caixa da Lanchonete da DB.
-Sua missão será construir a lógica que calcula o valor de uma compra de acordo com o cardápio, regras e descontos da Lanchonete.
+
+### COMO EXECUTAR A SOLUÇÃO
+Certifique-se de ter o Node.js instalado em sua máquina.
+
+Clone este repositório para sua máquina local: git clone https://github.com/seunome/sobrenome-desafio-caixa-lanchonete.git
+Navegue até a pasta do projeto: cd sobrenome-desafio-caixa-lanchonete
+Instale as dependências do projeto: npm install
+Execute os testes para validar a solução: npm test
+
+
+## USO DA CLASSE `CaixaDaLanchonete`
+A classe CaixaDaLanchonete contém o método calcularValorDaCompra que recebe dois parâmetros: formaDePagamento e itens.
+
+formaDePagamento (string): Deve ser um dos valores válidos: 'debito', 'credito' ou 'dinheiro'.
+itens (array de strings): Cada elemento da array deve ser uma string contendo o código do item e a quantidade separados por uma vírgula. Por exemplo: 'cafe,2' para dois cafés.
 
 ### CARDÁPIO
 
@@ -54,11 +66,24 @@ O sistema deve receber essa informação como string, utilizando a grafia exatam
 - Se o código do item não existir, apresentar mensagem "Item inválido!"
 - Se a forma de pagamento não existir, apresentar mensagem "Forma de pagamento inválida!"
 
-### O CÓDIGO
-Você está recebendo uma estrutura básica para desenvolver a lógica do caixa. O arquivo principal está localizado dentro da pasta `src` e se chama `caixa-da-lanchonete.js`. Você pode desenvolver a sua lógica criando outros arquivos, métodos e até mesmo outras classes, porém o resultado deve poder ser obtido através do método `calcularValorDaCompra`.
+### EXEMPLOS DE USO
+A classe CaixaDaLanchonete está implementada no arquivo caixa-da-lanchonete.js. Você pode importar e usar essa classe em seus projetos.
 
+import { CaixaDaLanchonete } from "./caixa-da-lanchonete.js";
+
+const caixa = new CaixaDaLanchonete();
+
+// Exemplo 1: Calcular valor da compra
+const formaDePagamento = 'credito';
+const itens = ['cafe,2', 'sanduiche,1', 'queijo,1'];
+const resultado = caixa.calcularValorDaCompra(formaDePagamento, itens);
+console.log(resultado); // 
+
+
+Exibirá o valor total da compra ou uma mensagem de erro conforme as 
 > ALERTA:
 > É importante que a estrutura básica descrita acima não seja alterada, incluindo nome e parâmetros do método. Iremos validar sua solução através destes, assim como você pode validar através dos cenários de testes já implementados em `src/caixa-da-lanchonete.test.js`.
+
 
 ### INSTALANDO E RODANDO NA SUA MÁQUINA
 1. Instalar o [Node](https://nodejs.org/en/)
@@ -68,7 +93,7 @@ npm install
 ```
 
 ### VALIDANDO A SOLUÇÃO
-Junto com a estrutura básica você está recebendo alguns cenários de testes para auxiliar na validação da sua solução. Recomendamos que você crie mais casos de teste para aumentar a confiabilidade da sua solução.
+Junto com a estrutura básica você recebi alguns cenários de testes para auxiliar na validação da solução. Criei mais casos de teste para aumentar a confiabilidade da solução.
 Para testar sua solução com os cenários já criados, basta rodar o seguinte comando:
 ```bash
 npm test
@@ -84,52 +109,13 @@ EXEMPLO:
 ```
 
 ### OUPUTS
-O retorno do método `calcularValorDaCompra` deve ser sempre uma string e conteúdo dela pode ser ou o valor total da compra ou uma mensagem de erro conforme as regras descritas anteriormente. O valor da compra deve ser formatado com `R$` e decimais separados por vírgula.
+O retorno do método `calcularValorDaCompra` está no formato string e o conteúdo dela pode ser ou o valor total da compra ou uma mensagem de erro conforme as regras descritas anteriormente. O valor da compra está formatado com `R$` e decimais separados por vírgula.
 
-Para padronizar a quantidade de decimais, utilize o método `toFixed` do JavaScript. Esse método serve o propósito deste desafio, porém na vida real a regra de arredondamento deve ser conferida! Para saber mais consulte a [Documentação do Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed).
-EXEMPLO:
-```js
-// exemplo de saída do valor da compra
-"R$ 6,00"
+O padrão da quantidade de decimais está no método `toFixed` do JavaScript, e foi devidamente conferido. 
 
-// exemplo de saída de erro
-"Forma de pagamento inválida!"
-```
 
-### EXEMPLOS
+### CONTATO
 
-EXEMPLO 1: Compra de chantily sem café.
-```js
-new CaixaDaLanchonete()
-  .calcularValorDaCompra('debito', ['chantily,1']);
-```
-O resultado esperado deve ser:
-```
-"Item extra não pode ser pedido sem o principal"
-```
+Se tiver alguma dúvida ou problema com a solução, você pode entrar em contato comigo pelo e-mail priscillatrevizan.dev@gmail.com.
 
-<br/>
-
-EXEMPLO 2: Compra de café com chantily.
-```js
-new CaixaDaLanchonete()
-  .calcularValorDaCompra('debito', ['cafe,1','chantily,1']);
-```
-O resultado esperado deve ser:
-```
-"R$ 4,50"
-```
-
-<br/>
-
-EXEMPLO 3: Compra de combo e dois cafés
-```js
-new CaixaDaLanchonete()
-  .calcularValorDaCompra('credito', ['combo1,1','cafe,2']);
-```
-O resultado esperado deve ser:
-```
-"R$ 15,96"
-```
-=======
-
+Obrigada pela oportunidade!
